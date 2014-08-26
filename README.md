@@ -37,6 +37,16 @@ See http://hapijs.com/tutorials/plugins if you're not sure how hapi plugins work
     });
 
 
+## Options
+
+        options: {
+            database: 'dbName', // name of your db
+            user: 'dbUser',     // db username
+            pass: 'dbPass',     // db password
+            dialect: 'mysql'    // database type
+            port: 8889          // database port #
+        }
+
 ## Usage
 Create your sequelize models in the hapi-seq directory. The plugin will automatically import all of your models and make them available throughout your application.
 
