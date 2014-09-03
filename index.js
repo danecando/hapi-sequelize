@@ -14,14 +14,14 @@ exports.register = function(plugin, options, next) {
 
     // Add all models in directory to db object
     fs
-        .readdirSync(__dirname)
-        .filter(function(file) {
-            return (file.indexOf('.') !== 0) && (file !== 'index.js') && (file !== 'package.json');
-        })
-        .forEach(function(file) {
-            var model = sequelize.import(path.join(__dirname, file));
-            db[model.name] = model;
-        });
+    .readdirSync(__dirname)
+    .filter(function(file) {
+        return (file.indexOf('.') !== 0) && (file !== 'index.js') && (file !== 'package.json');
+    })
+    .forEach(function(file) {
+        var model = sequelize.import(path.join(__dirname, file));
+        db[model.name] = model;
+    });
 
 
     // Add associations here

@@ -12,7 +12,7 @@ npm install for the hoek dependency
 See http://hapijs.com/tutorials/plugins if you're not sure how hapi plugins work but here is an example:
 
     server.pack.register({
-        plugin: require('./hapi-seq'),
+        plugin: require('./hapi-sequelized'),
         options: {
             database: 'dbName',
             user: 'dbUser',
@@ -22,7 +22,7 @@ See http://hapijs.com/tutorials/plugins if you're not sure how hapi plugins work
     }, function(err) {
         if (err) throw err;
         
-        var models = server.plugins['hapi-seq'].models;
+        var models = server.plugins['hapi-sequelized'].models;
         models
         .sequelize
         .sync({ force: true })
@@ -48,12 +48,12 @@ See http://hapijs.com/tutorials/plugins if you're not sure how hapi plugins work
         }
 
 ## Usage
-Create your sequelize models in the hapi-seq directory. The plugin will automatically import all of your models and make them available throughout your application.
+Create your sequelize models in the hapi-sequelized directory. The plugin will automatically import all of your models and make them available throughout your application.
 
 Your models will be availble throughout your application via server.plugins or plugin.plugins
 See: http://hapijs.com/api#pluginplugins 
 
-    var db = plugin.plugins['hapi-seq'].models;
+    var db = plugin.plugins['hapi-sequelized'].models;
     
     db.Test.create({
         email: 'some@email.com',

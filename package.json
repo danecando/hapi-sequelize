@@ -1,6 +1,6 @@
 {
-  "name": "hapi-seq",
-  "version": "1.0.0",
+  "name": "hapi-sequelized",
+  "version": "1.1.0",
   "description": "Port of sequelize's express demo to a hapi plugin",
   "main": "index.js",
   "scripts": {
