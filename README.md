@@ -1,4 +1,4 @@
-# hapi-seq - a plugin for using sequelize with hapi
+# hapi-sequelized - a plugin for using sequelize with hapi
 
 http://hapijs.com/
 http://sequelizejs.com/
