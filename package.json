@@ -13,6 +13,6 @@
   "author": "Dane Grant",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^2.4.1"
+    "hoek": "^2.4.1"
   }
 }

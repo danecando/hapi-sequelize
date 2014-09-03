@@ -1,7 +1,7 @@
 var fs          = require('fs'),
     path        = require('path'),
     Sequelize   = require('sequelize'),
-    lodash      = require('lodash'),
+    Hoek        = require('hoek'),
     db          = {};
 
 exports.register = function(plugin, options, next) {
@@ -36,10 +36,8 @@ exports.register = function(plugin, options, next) {
 
 
     // Expose sequelize objects to the application
-    plugin.expose('models', lodash.extend({
-        sequelize: sequelize,
-        Sequelize: Sequelize
-    }, db));
+    plugin.expose('models', Hoek.merge(db, { sequelize: sequelize, Sequelize: Sequelize }));
+
 
     next();
 };

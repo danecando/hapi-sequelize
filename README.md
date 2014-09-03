@@ -6,7 +6,7 @@ http://sequelizejs.com/
 This plugin is a port of the example of using sequelize with express from: http://sequelizejs.com/articles/express
 
 ## Installation
-I have left in the lodash.extend in for now so this plugin requires lodash to work. You can run npm install in the plugin directory or npm install lodash in your project root.
+npm install for the hoek dependency
 
 ## Setup
 See http://hapijs.com/tutorials/plugins if you're not sure how hapi plugins work but here is an example:
