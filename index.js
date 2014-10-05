@@ -9,7 +9,7 @@ exports.register = function(plugin, options, next) {
     // Create db connection
     var sequelize = new Sequelize(options.database, options.user, options.pass, {
         dialect: options.dialect || 'mysql',
-        port: options.port || 8889
+        port: options.port || 3306
     });
 
     // Add all models in directory to db object
