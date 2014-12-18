@@ -1,7 +1,6 @@
 var fs          = require('fs'),
     path        = require('path'),
     Sequelize   = require('sequelize'),
-    Hoek        = require('hoek'),
     db          = {};
 
 exports.register = function(plugin, options, next) {
@@ -14,18 +13,14 @@ exports.register = function(plugin, options, next) {
 
     // Add all models in directory to db object
     fs
-    .readdirSync(__dirname)
+    .readdirSync(path.resolve(__dirname, '../../models'))
     .filter(function(file) {
-        return (file.indexOf('.') !== 0) && (file !== 'index.js') && (file !== 'package.json');
+        return (file.indexOf('.') !== 0) && (file !== 'index.js'));
     })
     .forEach(function(file) {
-        var model = sequelize.import(path.join(__dirname, file));
+        var model = sequelize.import(path.join(path.resolve(__dirname, '../../models'), file));
         db[model.name] = model;
     });
-
-
-    // Add associations here
-
 
     // Create associations
     Object.keys(db).forEach(function (modelName) {
@@ -34,10 +29,10 @@ exports.register = function(plugin, options, next) {
         }
     });
 
+    db.sequelize = sequelize;
+    db.Sequelize = Sequelize;
 
-    // Expose sequelize objects to the application
-    plugin.expose('models', Hoek.merge(db, { sequelize: sequelize, Sequelize: Sequelize }));
-
+    plugin.expose('models', db);
 
     next();
 };

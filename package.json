@@ -1,7 +1,7 @@
 {
   "name": "hapi-sequelized",
-  "version": "1.1.0",
-  "description": "Port of sequelize's express demo to a hapi plugin",
+  "version": "1.1.1",
+  "description": "A plugin for using sequlize with the hapi.js web framework",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,4 @@
   ],
   "author": "Dane Grant",
   "license": "MIT",
-  "dependencies": {
-    "hoek": "^2.4.1"
-  }
 }
