@@ -15,7 +15,7 @@ exports.register = function(plugin, options, next) {
     fs
     .readdirSync(path.resolve(__dirname, '../../models'))
     .filter(function(file) {
-        return (file.indexOf('.') !== 0) && (file !== 'index.js'));
+        return (file.indexOf('.') !== 0) && (file !== 'index.js');
     })
     .forEach(function(file) {
         var model = sequelize.import(path.join(path.resolve(__dirname, '../../models'), file));
