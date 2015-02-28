@@ -1,38 +1,43 @@
-var fs          = require('fs'),
-    path        = require('path'),
-    Sequelize   = require('sequelize'),
-    db          = {};
+"use strict";
 
+var fs = require('fs');
+var path = require('path');
+var Sequelize = require('sequelize');
+
+/**
+ * Register sequelize as a Hapi plugin
+ * @param plugin
+ * @param options
+ * @param next
+ */
 exports.register = function(plugin, options, next) {
 
-    // Create db connection
+    var db = {};
+    var dir = path.join(process.env.PWD, options.models);
+
     var sequelize = new Sequelize(options.database, options.user, options.pass, {
-        dialect: options.dialect || 'mysql',
+       dialect: options.dialect || 'mysql',
         port: options.port || 3306
     });
 
-    // Add all models in directory to db object
-    fs
-    .readdirSync(path.resolve(__dirname, '../../models'))
-    .filter(function(file) {
-        return (file.indexOf('.') !== 0) && (file !== 'index.js');
-    })
-    .forEach(function(file) {
-        var model = sequelize.import(path.join(path.resolve(__dirname, '../../models'), file));
+    fs.readdirSync(dir).filter(function(file) {
+        return file.indexOf('.') !== 0;
+    }).forEach(function(file) {
+        var filePath = path.join(dir, file);
+        var model = sequelize.import(filePath);
         db[model.name] = model;
     });
 
-    // Create associations
-    Object.keys(db).forEach(function (modelName) {
-        if ('associate' in db[modelName]) {
-            db[modelName].associate(db)
+    Object.keys(db).forEach(function(modelName) {
+        if ("associate" in db[modelName]) {
+            db[modelName].associate(db);
         }
     });
 
     db.sequelize = sequelize;
     db.Sequelize = Sequelize;
 
-    plugin.expose('models', db);
+    plugin.expose('db', db);
 
     next();
 };
