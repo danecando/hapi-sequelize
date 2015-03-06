@@ -13,7 +13,7 @@ var Sequelize = require('sequelize');
 exports.register = function(plugin, options, next) {
 
     var db = {};
-    var dir = path.join(process.env.PWD, options.models);
+    var dir = path.join(process.cwd(), options.models);
 
     var sequelize = new Sequelize(options.database, options.user, options.pass, {
        dialect: options.dialect || 'mysql',

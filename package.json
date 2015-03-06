@@ -1,10 +1,14 @@
 {
   "name": "hapi-sequelized",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A plugin for using sequlize with the hapi.js web framework",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danecando/hapi-sequelized.git"
   },
   "keywords": [
     "sequelize",
