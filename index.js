@@ -16,8 +16,10 @@ exports.register = function(plugin, options, next) {
     var dir = path.join(process.cwd(), options.models);
 
     var sequelize = new Sequelize(options.database, options.user, options.pass, {
-       dialect: options.dialect || 'mysql',
-        port: options.port || 3306
+        host: options.host || 'localhost',
+        dialect: options.dialect || 'mysql',
+        port: options.port || 3306,
+        define: options.defaults || {}
     });
 
     fs.readdirSync(dir).filter(function(file) {
