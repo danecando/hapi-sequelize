@@ -33,12 +33,14 @@ server.register(
 ## Available Options
 ```javascript
 options: {
+    host: 'localhost',  // db host
     database: 'dbName', // name of your db
     user: 'dbUser',     // db username
     pass: 'dbPass',     // db password
-    dialect: 'mysql'    // database type
-    port: 8889          // database port #
-    models: 'models'    // path to models directory from project root
+    dialect: 'mysql',   // database type
+    port: 8889,         // database port #
+    models: 'models',   // path to models directory from project root
+    defaults: { }       // see: http://sequelize.readthedocs.org/en/latest/docs/getting-started/#application-wide-model-options
 }
 ```
 
