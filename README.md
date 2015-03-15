@@ -1,5 +1,7 @@
 # hapi-sequelized - a plugin for using sequelize with hapi
 
+[![Build Status](https://travis-ci.org/tribou/hapi-sequelized.svg)](https://travis-ci.org/tribou/hapi-sequelized)
+
 * http://hapijs.com/
 * http://sequelizejs.com/
 
@@ -48,7 +50,7 @@ options: {
 Create your sequelize models in the models directory in the root of your hapi project. The plugin will automatically import all of your models and make them available throughout your application.
 
 Your models will be availble throughout your application via server.plugins (which is also available through the request object ie: request.server.plugins) or plugin.plugins
-See: http://hapijs.com/api#pluginplugins 
+See: http://hapijs.com/api#pluginplugins
 
 ```javascript
 var db = request.server.plugins['hapi-sequelized'].db;
