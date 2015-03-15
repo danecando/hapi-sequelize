@@ -77,7 +77,7 @@ describe('Hapi-Sequelized', function () {
                 // test all options in documentation
                 expect(opt.dialect).to.equal(options.dialect);
                 expect(opt.port).to.equal(options.port);
-                //expect(config.host).to.equal(options.host);
+                expect(config.host).to.equal(options.host);
                 expect(config.database).to.equal(options.database);
                 expect(config.username).to.equal(options.user);
                 expect(config.password).to.equal(options.pass);
@@ -86,9 +86,7 @@ describe('Hapi-Sequelized', function () {
 
         });
 
-    it('should apply application-wide model options', {
-            skip: true
-        },
+    it('should apply application-wide model options',
         function (done) {
 
             var register = {
@@ -127,6 +125,43 @@ describe('Hapi-Sequelized', function () {
 
                 // check if the User model was imported
                 expect(models.User).to.exist();
+                done();
+            });
+
+        });
+
+    it('should apply default host, dialect, port, and global defaults',
+        function (done) {
+
+            // unset host, dialect port, and defaults
+            delete options.host;
+            delete options.port;
+            delete options.dialect;
+            delete options.defaults;
+
+            var register = {
+                register: require('..'),
+                options: options
+            };
+
+            server.register([register], function (err) {
+
+                var opt = server.plugins['hapi-sequelized']
+                    .db.sequelize.options;
+                var config = server.plugins[
+                        'hapi-sequelized']
+                    .db.sequelize.config;
+                var models = server.plugins[
+                        'hapi-sequelized']
+                    .db.sequelize.models;
+
+                // check if the default options were applied
+                expect(err).to.not.exist();
+                expect(opt.dialect).to.equal('mysql');
+                expect(opt.port).to.equal(3306);
+                expect(config.host).to.equal('localhost');
+                expect(models.User.options.timestamps).to.be
+                    .true();
                 done();
             });
 
