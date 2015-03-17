@@ -12,7 +12,15 @@
   },
   "keywords": [
     "sequelize",
-    "hapi"
+    "hapi",
+    "mysql",
+    "sqlite",
+    "postgresql",
+    "postgres",
+    "mssql",
+    "orm",
+    "plugin",
+    "database"
   ],
   "author": "Dane Grant",
   "license": "MIT",
