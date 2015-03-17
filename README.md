@@ -42,8 +42,6 @@ options: {
     dialect: 'mysql',   // database type
     port: 8889,         // database port #
     models: 'models',   // path to models directory from project root
-                        // or optionally use an array of multiple model folders,
-                        //e.g. ['features/products', 'features/customers']
     defaults: { }       // see: http://sequelize.readthedocs.org/en/latest/docs/getting-started/#application-wide-model-options
 }
 ```
