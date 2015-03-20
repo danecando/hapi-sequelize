@@ -1,6 +1,6 @@
 {
   "name": "hapi-sequelized",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A plugin for using sequlize with the hapi.js web framework",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,15 @@
   },
   "keywords": [
     "sequelize",
-    "hapi"
+    "hapi",
+    "mysql",
+    "sqlite",
+    "postgresql",
+    "postgres",
+    "mssql",
+    "orm",
+    "plugin",
+    "database"
   ],
   "author": "Dane Grant",
   "license": "MIT",
