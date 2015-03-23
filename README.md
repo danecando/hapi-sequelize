@@ -1,6 +1,7 @@
 ## hapi-sequelized - a plugin for using sequelize with hapi
 
 [![Build Status](https://travis-ci.org/danecando/hapi-sequelized.svg)](https://travis-ci.org/danecando/hapi-sequelized)
+[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/hapi-sequelized)
 
 * http://hapijs.com/
 * http://sequelizejs.com/
