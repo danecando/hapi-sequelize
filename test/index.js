@@ -24,6 +24,7 @@ describe('Hapi-Sequelized', function () {
         pass: 'dbPass', // db password
         dialect: 'sqlite', // database type
         port: 8889, // database port #
+        storage: 'test.sqlite', // db filename for sqlite dialect
         models: 'test/models', // path to models directory from project root
         defaults: {
             timestamps: false
@@ -81,6 +82,7 @@ describe('Hapi-Sequelized', function () {
                 expect(config.database).to.equal(options.database);
                 expect(config.username).to.equal(options.user);
                 expect(config.password).to.equal(options.pass);
+                expect(opt.storage).to.equal(options.storage);
                 done();
             });
 
