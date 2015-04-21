@@ -169,4 +169,20 @@ describe('Hapi-Sequelized', function () {
 
         });
 
+    it('should provide the db object via setupDB method',
+        function (done) {
+
+            var hapiSequelized = require('..');
+
+            hapiSequelized.setupDB(options, function(err, db) {
+
+                // no errors
+                expect(err).to.not.exist;
+
+                //instance of Sequelize should be registered
+                expect(db.sequelize).to.be.an.instanceOf(Sequelize);
+                done();
+            })
+        });
+
 });
