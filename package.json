@@ -34,7 +34,7 @@
   "dependencies": {
     "defaults": "^1.0.2",
     "lodash.omit": "^3.1.0",
-    "sqlizr": "mikefrey/sqlizr"
+    "sqlizr": "^1.0.0"
   },
   "peerDependencies": {
     "sequelize": "^2.0.4"
