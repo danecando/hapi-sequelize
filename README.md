@@ -51,7 +51,7 @@ options: {
     port: 8889,         // database port #
     models: ['models/**/*.js', 'other/models/*.js'],   // glob or an array of globs to directories containing your sequelize models
     logging: false      // sql query logging
-    sequelize: {}       // Application wide model options object passed to the Sequelize constructor http://docs.sequelizejs.com/en/latest/api/sequelize/#new-sequelizedatabase-usernamenull-passwordnull-options
+    sequelize: {}       // Options object passed to the Sequelize constructor http://docs.sequelizejs.com/en/latest/api/sequelize/#new-sequelizedatabase-usernamenull-passwordnull-options
 }
 ```
 
