@@ -1,4 +1,4 @@
-## hapi-sequelized - a plugin for using sequelize with hapi
+## hapi-sequelized - a hapi plugin for the sequelize orm
 
 [![Build Status](https://travis-ci.org/danecando/hapi-sequelized.svg)](https://travis-ci.org/danecando/hapi-sequelized)
 [![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/hapi-sequelized)
@@ -9,8 +9,8 @@
 ### Installation
 npm install --save hapi-sequelized
 
-### Setup
-See http://hapijs.com/tutorials/plugins if you're not sure how hapi plugins work but here is an example:
+### Loading the plugin
+See http://hapijs.com/tutorials/plugins     
 
 ```javascript
 server.register(
@@ -18,47 +18,89 @@ server.register(
         {
             register: require('hapi-sequelized'),
             options: {
-                models: 'models',
-                database: 'dbname',
+                database: 'dbName',
                 user: 'root',
                 pass: 'root',
-                port: 8889
+                dialect: 'mysql',
+                port: 8889,
+                models: 'models/**/*.js',
+                sequelize: {
+                    define: {
+                        underscoredAll: true
+                    }
+                }
             }
-        }
+        },
     ], function(err) {
         if (err) {
-            console.log('failed to load plugin');
+            console.error('failed to load plugin');
         }
     }
 );
 ```
 
 ### Available Options
+
 ```javascript
 options: {
-    host: 'localhost',  // db host
-    database: 'dbName', // name of your db
-    user: 'dbUser',     // db username
-    pass: 'dbPass',     // db password
+    database: 'dbName', // database name
+    user: 'root',       // db username
+    pass: 'root',       // db password
     dialect: 'mysql',   // database type
+    host: 'localhost',  // db host
     port: 8889,         // database port #
-    models: 'models',   // path to models directory from project root
-                        // or optionally use an array of multiple model folders,
-                        //e.g. ['features/products', 'features/customers']
-    defaults: { }       // see: http://sequelize.readthedocs.org/en/latest/docs/getting-started/#application-wide-model-options
+    models: ['models/**/*.js', 'other/models/*.js'],   // glob or an array of globs to directories containing your sequelize models
+    logging: false      // sql query logging
+    sequelize: {}       // Options object passed to the Sequelize constructor http://docs.sequelizejs.com/en/latest/api/sequelize/#new-sequelizedatabase-usernamenull-passwordnull-options
 }
 ```
 
 ### Usage
-Create your sequelize models in the models directory in the root of your hapi project. The plugin will automatically import all of your models and make them available throughout your application.
-
-Your models will be availble throughout your application via server.plugins (which is also available through the request object ie: request.server.plugins)
+Your models will be available throughout your application via server.plugins (which is also available through the request object ie: request.server.plugins)
 
 ```javascript
 var db = request.server.plugins['hapi-sequelized'].db;
 
-db.Test.create({
+db.User.create({
     email: 'some@email.com',
-    password: 'alskfjdfoa'
+    password: 'password123'
+});
+```
+
+### Model Definitions
+Exports a function that returns a model definition 
+http://docs.sequelizejs.com/en/latest/docs/models-definition/
+
+```javascript
+module.exports = function(sequelize, DataTypes) {
+    var StoreOptions = sequelize.define(
+        'StoreOptions',
+        {
+            optionName: {
+                type: DataTypes.STRING,
+                unique: true,
+                allowNull: false
+            },
+            optionValue: {
+                type: DataTypes.TEXT
+            }
+        },
+        {
+            tableName: 'store_config',
+            timestamps: false
+        }
+    );
+
+    return StoreOptions;
+};
+```
+
+### Syncing Models
+Creates all your tables and sets up your database
+
+```javascript
+var db = server.plugins['hapi-sequelized'].db;
+db.sequelize.sync().then(function() {
+  console.log('models synced');
 });
 ```

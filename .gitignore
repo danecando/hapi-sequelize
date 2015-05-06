@@ -31,3 +31,7 @@ node_modules
 
 # Webstorm
 .idea
+
+npm-debug.log
+
+.DS_Store
