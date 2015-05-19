@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "hoek": "^2.12.0",
+    "sequelize": "^2.1.3",
     "sqlizr": "^1.0.0"
   }
 }

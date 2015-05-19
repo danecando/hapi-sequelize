@@ -11,22 +11,23 @@ var beforeEach = lab.beforeEach;
 var describe = lab.describe;
 var it = lab.it;
 
-describe('Hapi-Sequelized', function() {
-
+describe('hapi-sequelized', function() {
     // Hapi server for each test
     var server;
 
     // Options to test
     var options = {
-        host: '127.0.0.1', // db host
-        database: 'testing', // name of your db
-        user: 'root', // db username
-        pass: '', // db password
+        host: '127.0.0.1',
+        database: 'testing',
+        user: 'root',
+        pass: '',
         port: 3306,
-        dialect: 'mysql', // database type
-        models: 'test/models/**/*', // path to models directory from project root
+        dialect: 'mysql',
+        models: ['test/models/**/*.js', 'test/other-models/**/*.js'],
         sequelize: {
-            timestamps: false
+            define: {
+                timestamps: false
+            }
         }
     };
 
@@ -37,35 +38,32 @@ describe('Hapi-Sequelized', function() {
         done();
     });
 
-    it('should register the plugin', function(done) {
-
-        var register = {
-            register: require('../'),
-            options: options
-        };
-
-        server.register([register], function(err) {
-
-            // no errors
-            expect(err).to.not.exist;
-
-            // instance of Sequelize should be registered
-            expect(server.plugins['hapi-sequelized'].db.sequelize)
-                .to.be.an.instanceOf(Sequelize);
-
-            done();
-        });
-    });
-
-    it('should apply all the options passed during register', function(done) {
-
+    it('should register the plugin',
+        function(done) {
             var register = {
-                register: require('../'),
+                register: require('..'),
+                options: options
+            };
+
+            server.register([register], function(err) {
+                // no errors
+                expect(err).to.not.exist;
+
+                // instance of Sequelize should be registered
+                expect(server.plugins['hapi-sequelized'].db.sequelize).to.be.an.instanceOf(Sequelize);
+
+                done();
+            });
+        });
+
+    it('should apply all the options passed during register',
+        function(done) {
+            var register = {
+                register: require('..'),
                 options: options
             };
 
             server.register([register], function() {
-
                 var opt = server.plugins['hapi-sequelized'].db.sequelize.options;
                 var config = server.plugins['hapi-sequelized'].db.sequelize.config;
 
@@ -85,31 +83,28 @@ describe('Hapi-Sequelized', function() {
         function(done) {
 
             var register = {
-                register: require('../'),
+                register: require('..'),
                 options: options
             };
 
             server.register([register], function() {
-
                 var models = server.plugins['hapi-sequelized'].db.sequelize.models;
 
-                // check if the { timestamps: false } was applied to
-                // the User model
+                // check if the { timestamps: false } was applied to the User model
                 expect(models.User.options.timestamps).to.be.false();
+
                 done();
             });
         });
 
     it('should import all models from the specified models directory',
         function(done) {
-
             var register = {
-                register: require('../'),
+                register: require('..'),
                 options: options
             };
 
             server.register([register], function() {
-
                 var models = server.plugins['hapi-sequelized'].db.sequelize.models;
 
                 // check if the User model was imported
@@ -119,35 +114,51 @@ describe('Hapi-Sequelized', function() {
             });
         });
 
-    it('should apply default host, dialect, port, and global defaults',
+    it('should apply default host, dialect, port',
         function(done) {
-
-            // unset host, dialect port, and defaults
+            // unset host, dialect, and port
             delete options.host;
             delete options.port;
             delete options.dialect;
-            delete options.sequelize;
 
             var register = {
-                register: require('../'),
+                register: require('..'),
                 options: options
             };
 
             server.register([register], function(err) {
-
                 var opt = server.plugins['hapi-sequelized'].db.sequelize.options;
                 var config = server.plugins['hapi-sequelized'].db.sequelize.config;
-                var models = server.plugins['hapi-sequelized'].db.sequelize.models;
 
                 // check if the default options were applied
                 expect(err).to.not.exist();
                 expect(opt.dialect).to.equal('mysql');
                 expect(opt.port).to.equal(3306);
                 expect(config.host).to.equal('localhost');
-                expect(models.User.options.timestamps).to.be.true();
 
                 done();
             });
         });
 
+    it('should import all models from the models array specified in options, from all directories, and their respective nested directories, and confirm that the models exist',
+        function(done) {
+            var register = {
+                register: require('..'),
+                options: options
+            };
+
+            server.register([register], function() {
+                var models = server.plugins['hapi-sequelized'].db.sequelize.models;
+
+                // check if all models were imported
+                expect(models.User).to.exist();
+                expect(models.Product).to.exist();
+                expect(models.Category).to.exist();
+                expect(models.BlogRoll).to.exist();
+                expect(models.Blog).to.exist();
+                expect(models.Post).to.exist();
+
+                done();
+            });
+        });
 });
