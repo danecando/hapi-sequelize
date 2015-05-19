@@ -70,7 +70,7 @@ describe('hapi-sequelized', function() {
                 // test all options in documentation
                 expect(opt.dialect).to.equal(options.dialect);
                 expect(opt.port).to.equal(options.port);
-                expect(config.host).to.equal(options.host);
+                expect(opt.host).to.equal(options.host);
                 expect(config.database).to.equal(options.database);
                 expect(config.username).to.equal(options.user);
                 expect(config.password).to.equal(options.pass);
@@ -134,7 +134,7 @@ describe('hapi-sequelized', function() {
                 expect(err).to.not.exist();
                 expect(opt.dialect).to.equal('mysql');
                 expect(opt.port).to.equal(3306);
-                expect(config.host).to.equal('localhost');
+                expect(opt.host).to.equal('localhost');
 
                 done();
             });
