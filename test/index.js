@@ -18,14 +18,14 @@ describe('Hapi-Sequelized', function () {
 
     // Options to test
     var options = {
-        host: 'myhostname', // db host
-        database: 'dbName', // name of your db
-        user: 'dbUser', // db username
-        pass: 'dbPass', // db password
-        dialect: 'sqlite', // database type
-        port: 8889, // database port #
-        storage: 'test.sqlite', // db filename for sqlite dialect
-        models: 'test/models', // path to models directory from project root
+        host: '127.0.0.1', // db host
+        database: 'testing', // name of your db
+        user: 'root', // db username
+        pass: '', // db password
+        dialect: 'mysql', // database type
+        //port: 8889, // database port #
+        //storage: 'test.sqlite', // db filename for sqlite dialect
+        models: 'test/models/**/*', // path to models directory from project root
         defaults: {
             timestamps: false
         } // see: http://sequelize.readthedocs.org/en/latest/docs/getting-started/#application-wide-model-options

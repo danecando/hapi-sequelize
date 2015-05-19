@@ -3,3 +3,5 @@ node_js:
   - "0.12"
   - "0.11"
   - "iojs"
+before_script:
+  - mysql -e 'create database testing;'
