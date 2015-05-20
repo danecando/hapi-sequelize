@@ -67,8 +67,6 @@ describe('hapi-sequelized', function() {
                 var opt = server.plugins['hapi-sequelized'].db.sequelize.options;
                 var config = server.plugins['hapi-sequelized'].db.sequelize.config;
 
-                console.log(config.password);
-
                 // test all options in documentation
                 expect(opt.dialect).to.equal(options.dialect);
                 expect(opt.port).to.equal(options.port);

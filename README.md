@@ -51,17 +51,21 @@ options: {
     port: 8889,         // database port #
     models: ['models/**/*.js', 'other/models/*.js'],   // glob or an array of globs to directories containing your sequelize models
     logging: false      // sql query logging
-    sequelize: {}       // Options object passed to the Sequelize constructor http://docs.sequelizejs.com/en/latest/api/sequelize/#new-sequelizedatabase-usernamenull-passwordnull-options
+    sequelize: {       // Options object passed to the Sequelize constructor http://docs.sequelizejs.com/en/latest/api/sequelize/#new-sequelizedatabase-usernamenull-passwordnull-options
+        define: {
+            timestamps: false
+        }
+    }
 }
 ```
 
 ### Usage
-Your models will be available throughout your application via server.plugins (which is also available through the request object ie: request.server.plugins)
+Your models are attached to the sequelize instance and will be available throughout your application via server.plugins (which is also available through the request object ie: request.server.plugins)
 
 ```javascript
-var db = request.server.plugins['hapi-sequelized'].db;
+var models = request.server.plugins['hapi-sequelized'].db.sequelize.models;
 
-db.User.create({
+models.User.create({
     email: 'some@email.com',
     password: 'password123'
 });

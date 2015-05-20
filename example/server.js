@@ -8,11 +8,17 @@ server.register(
         {
             register: require('hapi-sequelized'),
             options: {
-                models: 'models',
-                database: 'dbname',
+                database: 'dbName',
                 user: 'root',
                 pass: 'root',
-                port: 8889
+                dialect: 'mysql',
+                port: 8889,
+                models: 'models/**/*.js',
+                sequelize: {
+                    define: {
+                        underscoredAll: true
+                    }
+                }
             }
         }
     ], function(err) {
@@ -26,9 +32,9 @@ server.route({
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
-        var db = request.server.plugins['hapi-sequelized'].db;
+        var models = request.server.plugins['hapi-sequelized'].db.sequelize.models;
 
-        db.Account.create({
+        models.Account.create({
             email: 'some@email.com',
             firstName: 'John',
             lastName: 'Smith'
