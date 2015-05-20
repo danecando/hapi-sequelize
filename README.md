@@ -6,6 +6,13 @@
 * http://hapijs.com/
 * http://sequelizejs.com/
 
+### PSA
+The plugin has been updated to use version 3 of sequelize which implements fixes to many of the vulnerabilities explained in the article below. Not all of them have been addressed yet so proceed with caution.
+https://securityblog.redhat.com/2015/05/20/json-homoiconicity-and-database-access/
+
+Also make sure to take a look at the changelog if you're upgrading from a version < 3. There are several breaking changes.
+https://github.com/sequelize/sequelize/blob/master/changelog.md
+
 ### Installation
 npm install --save hapi-sequelized
 
