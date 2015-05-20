@@ -3,5 +3,12 @@ node_js:
   - "0.12"
   - "0.11"
   - "iojs"
+sudo: false
+cache:
+  directories:
+    - node_modules
 before_script:
   - mysql -e 'create database testing;'
+script:
+  - npm run lint
+  - npm test
