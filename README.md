@@ -107,7 +107,7 @@ module.exports = function(sequelize, DataTypes) {
 ```
 
 ### Syncing Models
-Creates all your tables and sets up your database
+Sync'ing needs to be done after the plugin has loaded (typically in the callback function where it was registered)
 
 ```javascript
 var db = server.plugins['hapi-sequelized'].db;
