@@ -122,7 +122,7 @@ db.sequelize.sync().then(function() {
 ### Security
 
 This plugin has been updated to use version 3+ of Sequelize which adds many 
-preventative measures to help users avoid many of the vulnerabilities explained
+preventative measures to help users avoid the vulnerabilities explained
 in the article below. Please give the article a good read to ensure that you're
 using Sequelize safely!
 
