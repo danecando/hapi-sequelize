@@ -6,18 +6,13 @@
 * http://hapijs.com/
 * http://sequelizejs.com/
 
-### PSA
-The plugin has been updated to use version 3 of sequelize which implements fixes to many of the vulnerabilities explained in the article below. Not all of them have been addressed yet so proceed with caution.
-https://securityblog.redhat.com/2015/05/20/json-homoiconicity-and-database-access/
-
-Also make sure to take a look at the changelog if you're upgrading from a version < 3. There are several breaking changes.
-https://github.com/sequelize/sequelize/blob/master/changelog.md
-
 ### Installation
-npm install --save hapi-sequelized
+
+`npm install hapi-sequelized --save`
 
 ### Loading the plugin
-See http://hapijs.com/tutorials/plugins     
+
+See http://hapijs.com/tutorials/plugins
 
 ```javascript
 server.register(
@@ -67,7 +62,10 @@ options: {
 ```
 
 ### Usage
-Your models are attached to the sequelize instance and will be available throughout your application via server.plugins (which is also available through the request object ie: request.server.plugins)
+
+Your models are attached to the sequelize instance and will be available
+throughout your application via server.plugins (which is also available
+through the request object ie: request.server.plugins)
 
 ```javascript
 var models = request.server.plugins['hapi-sequelized'].db.sequelize.models;
@@ -79,6 +77,7 @@ models.User.create({
 ```
 
 ### Model Definitions
+
 Exports a function that returns a model definition 
 http://docs.sequelizejs.com/en/latest/docs/models-definition/
 
@@ -107,7 +106,11 @@ module.exports = function(sequelize, DataTypes) {
 ```
 
 ### Syncing Models
-Sync'ing needs to be done after the plugin has loaded (typically in the callback function where it was registered)
+
+Sync'ing needs to be done after the plugin has loaded (typically in the
+callback function where it was registered). A regular sync will 
+ `CREATE TABLE IF NOT EXISTS` , while a sync with the 
+`{ force: true }` option passed will drop all of your tables first. 
 
 ```javascript
 var db = server.plugins['hapi-sequelized'].db;
@@ -115,3 +118,17 @@ db.sequelize.sync().then(function() {
   console.log('models synced');
 });
 ```
+
+### Security
+
+This plugin has been updated to use version 3+ of Sequelize which adds many 
+preventative measures to help users avoid many of the vulnerabilities explained
+in the article below. Please give the article a good read to ensure that you're
+using Sequelize safely!
+
+https://securityblog.redhat.com/2015/05/20/json-homoiconicity-and-database-access/
+
+Also make sure to take a look at the changelog if you're upgrading from a pre 3+ 
+version. There are several breaking changes that will need to be addressed.
+
+https://github.com/sequelize/sequelize/blob/master/changelog.md
