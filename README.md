@@ -119,6 +119,25 @@ db.sequelize.sync().then(function() {
 });
 ```
 
+### Add Models to Hapi Request Object
+
+To enable access to your models via the Hapi request object add the following code when creating the Hapi server
+
+```javascript
+server.ext('onPreHandler', function(modelCollections) {
+    return function(request, reply) {
+        request.models = modelCollections;
+        reply.continue();
+    }
+}(server.plugins['hapi-sequelized'].db.sequelize.models));
+```
+
+Then within a request hanlder you can access the models with
+
+```javascript
+var dbModel = request.models.modelname;
+```
+
 ### Security
 
 This plugin has been updated to use version 3+ of Sequelize which adds many 
