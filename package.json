@@ -1,6 +1,6 @@
 {
   "name": "hapi-sequelized",
-  "version": "2.1.3",
+  "version": "2.1.5",
   "description": "A hapi plugin for the sequelize ORM",
   "main": "index.js",
   "scripts": {
