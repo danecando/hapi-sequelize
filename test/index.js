@@ -163,4 +163,34 @@ describe('hapi-sequelized', function() {
                 done();
             });
         });
+
+    it('should connect to a database using the URI format',
+       function(done) {
+            options.uri = options.dialect + '://' + options.user + ':' + options.pass + '@' + options.host + ':' + options.port + '/' + options.database
+            delete options.host;
+            delete options.port;
+            delete options.dialect;
+            delete options.user;
+            delete options.pass;
+            delete options.database;
+
+            var register = {
+               register: require('..'),
+               options: options
+            };
+
+           server.register([register], function() {
+                var models = server.plugins['hapi-sequelized'].db.sequelize.models;
+
+                // check if all models were imported
+                expect(models.User).to.exist();
+                expect(models.Product).to.exist();
+                expect(models.Category).to.exist();
+                expect(models.BlogRoll).to.exist();
+                expect(models.Blog).to.exist();
+                expect(models.Post).to.exist();
+
+                done();
+           });
+       });
 });
