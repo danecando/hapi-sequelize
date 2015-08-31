@@ -16,26 +16,29 @@ describe('hapi-sequelized', function() {
     var server;
 
     // Options to test
-    var options = {
-        host: '127.0.0.1',
-        database: 'testing',
-        user: 'root',
-        pass: '',
-        port: 3306,
-        dialect: 'mysql',
-        models: ['test/models/**/*.js', 'test/other-models/**/*.js'],
-        sequelize: {
-            define: {
-                timestamps: false
-            }
-        }
-    };
+    var options = {};
 
     // Setup Hapi server to register the plugin
     beforeEach(function(done) {
         server = new Hapi.Server();
         server.connection();
         done();
+
+        options = {
+            host: '127.0.0.1',
+            database: 'testing',
+            user: 'root',
+            pass: '',
+            port: 3306,
+            dialect: 'mysql',
+            models: ['test/models/**/*.js', 'test/other-models/**/*.js'],
+            sequelize: {
+                define: {
+                    timestamps: false
+                }
+            }
+        };
+
     });
 
     it('should register the plugin',
