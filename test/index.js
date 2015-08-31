@@ -116,6 +116,29 @@ describe('hapi-sequelized', function() {
             });
         });
 
+    it('uses "username" and "password" when provided',
+        function(done) {
+            options.username = options.user;
+            options.password = option.pass;
+
+            var register = {
+                register: require('..'),
+                options: options
+            };
+
+            server.register([register], function(err) {
+                var opt = server.plugins['hapi-sequelized'].db.sequelize.options;
+                var config = server.plugins['hapi-sequelized'].db.sequelize.config;
+
+                // check if the default options were applied
+                expect(err).to.not.exist();
+                expect(opt.user).to.equal(options.username);
+                expect(opt.pass).to.equal(options.password);
+                done();
+            });
+        });
+
+
     it('should apply default host, dialect, port',
         function(done) {
             // unset host, dialect, and port
@@ -194,3 +217,4 @@ describe('hapi-sequelized', function() {
            });
        });
 });
+
