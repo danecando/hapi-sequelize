@@ -119,7 +119,7 @@ describe('hapi-sequelized', function() {
     it('uses "username" and "password" when provided',
         function(done) {
             options.username = options.user;
-            options.password = option.pass;
+            options.password = options.pass;
 
             var register = {
                 register: require('..'),
