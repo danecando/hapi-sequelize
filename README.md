@@ -159,7 +159,7 @@ server.ext('onPreHandler', function(modelCollections) {
 }(server.plugins['hapi-sequelized'].db.sequelize.models));
 ```
 
-Then within a request hanlder you can access the models with
+Then within a request handler you can access the models with
 
 ```javascript
 var dbModel = request.models.modelname;
