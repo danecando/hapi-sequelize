@@ -1,6 +1,6 @@
 {
   "name": "hapi-sequelized",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "A hapi plugin for the sequelize ORM",
   "main": "index.js",
   "scripts": {
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "hoek": "^2.12.0",
-    "sequelize": "^3.5.1",
+    "sequelize": "^3.7.0",
     "sqlizr": "^1.1.0"
   }
 }
