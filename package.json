@@ -1,8 +1,8 @@
 {
   "name": "hapi-sequelized",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "A hapi plugin for the sequelize ORM",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "lab",
     "lint": "eslint lib/*.js"
@@ -35,7 +35,9 @@
   },
   "dependencies": {
     "hoek": "^2.12.0",
-    "sequelize": "^3.7.0",
     "sqlizr": "^1.1.0"
+  },
+  "peerDependencies": {
+    "sequelize": "^2.x"
   }
 }
