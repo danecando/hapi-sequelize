@@ -44,7 +44,7 @@ describe('hapi-sequelized', function() {
     it('should register the plugin',
         function(done) {
             var register = {
-                register: require('..'),
+                register: require('../lib'),
                 options: options
             };
 
@@ -62,7 +62,7 @@ describe('hapi-sequelized', function() {
     it('should apply all the options passed during register',
         function(done) {
             var register = {
-                register: require('..'),
+                register: require('../lib'),
                 options: options
             };
 
@@ -85,7 +85,7 @@ describe('hapi-sequelized', function() {
         function(done) {
 
             var register = {
-                register: require('..'),
+                register: require('../lib'),
                 options: options
             };
 
@@ -102,7 +102,7 @@ describe('hapi-sequelized', function() {
     it('should import all models from the specified models directory',
         function(done) {
             var register = {
-                register: require('..'),
+                register: require('../lib'),
                 options: options
             };
 
@@ -124,7 +124,7 @@ describe('hapi-sequelized', function() {
             delete options.dialect;
 
             var register = {
-                register: require('..'),
+                register: require('../lib'),
                 options: options
             };
 
@@ -145,7 +145,7 @@ describe('hapi-sequelized', function() {
     it('should import all models from the models array specified in options, from all directories, and their respective nested directories, and confirm that the models exist',
         function(done) {
             var register = {
-                register: require('..'),
+                register: require('../lib'),
                 options: options
             };
 
@@ -175,7 +175,7 @@ describe('hapi-sequelized', function() {
             delete options.database;
 
             var register = {
-               register: require('..'),
+               register: require('../lib'),
                options: options
             };
 
