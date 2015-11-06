@@ -1,7 +1,7 @@
 {
-  "name": "hapi-sequelized",
-  "version": "2.2.2",
-  "description": "A hapi plugin for the sequelize ORM",
+  "name": "hapi-sequelize",
+  "version": "2.2.3",
+  "description": "A Hapi plugin for the Sequelize ORM",
   "main": "lib/index.js",
   "scripts": {
     "test": "lab",
@@ -9,22 +9,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/danecando/hapi-sequelized.git"
+    "url": "https://github.com/danecando/hapi-sequelize.git"
   },
   "keywords": [
     "sequelize",
     "hapi",
+    "hapi.js",
     "mysql",
     "sqlite",
     "postgresql",
     "postgres",
-    "mssql",
+    "mysql",
     "orm",
     "plugin",
     "database"
   ],
   "author": "Dane Grant",
-  "license": "MIT",
+  "license": "ISC",
   "devDependencies": {
     "code": "^1.3.0",
     "eslint": "^0.21.2",

@@ -1,14 +1,13 @@
-## hapi-sequelized - a hapi plugin for the sequelize orm
+## hapi-sequelize - A Hapi plugin for the Sequelize ORM
 
-[![Build Status](https://travis-ci.org/danecando/hapi-sequelized.svg)](https://travis-ci.org/danecando/hapi-sequelized)
-[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/hapi-sequelized)
+[![Build Status](https://travis-ci.org/danecando/hapi-sequelize.svg)](https://travis-ci.org/danecando/hapi-sequelize)
 
 * http://hapijs.com/
 * http://sequelizejs.com/
 
 ### Installation
 
-`npm install hapi-sequelized --save`
+`npm install hapi-sequelize --save`
 
 ### Loading the plugin
 
@@ -18,7 +17,7 @@ See http://hapijs.com/tutorials/plugins
 server.register(
     [
         {
-            register: require('hapi-sequelized'),
+            register: require('hapi-sequelize'),
             options: {
                 database: 'dbName',
                 user: 'root',
@@ -48,7 +47,7 @@ database connection is extracted from the codebase, like on Heroku:
 server.register(
     [
         {
-            register: require('hapi-sequelized'),
+            register: require('hapi-sequelize'),
             options: {
                 uri: process.env.DATABASE_URI,
                 models: 'models/**/*.js',
@@ -80,7 +79,7 @@ options: {
     uri: 'postgres://user:pass@example.com:5432/dbname' // database URI
     models: ['models/**/*.js', 'other/models/*.js'],   // glob or an array of globs to directories containing your sequelize models
     logging: false      // sql query logging
-    sequelize: {       // Options object passed to the Sequelize constructor http://docs.sequelizejs.com/en/latest/api/sequelize/#new-sequelizedatabase-usernamenull-passwordnull-options
+    sequelize: {       // Options object passed to the Sequelize constructor http://docs.sequelizejs.com/en/latest/api/sequelize/#new-sequelizeatabase-usernamenull-passwordnull-options
         define: {
             timestamps: false
         }
@@ -95,7 +94,7 @@ throughout your application via server.plugins (which is also available
 through the request object ie: request.server.plugins)
 
 ```javascript
-var models = request.server.plugins['hapi-sequelized'].db.sequelize.models;
+var models = request.server.plugins['hapi-sequelize'].db.sequelize.models;
 
 models.User.create({
     email: 'some@email.com',
@@ -140,7 +139,7 @@ callback function where it was registered). A regular sync will
 `{ force: true }` option passed will drop all of your tables first. 
 
 ```javascript
-var db = server.plugins['hapi-sequelized'].db;
+var db = server.plugins['hapi-sequelize'].db;
 db.sequelize.sync().then(function() {
   console.log('models synced');
 });
@@ -156,7 +155,7 @@ server.ext('onPreHandler', function(modelCollections) {
         request.models = modelCollections;
         reply.continue();
     }
-}(server.plugins['hapi-sequelized'].db.sequelize.models));
+}(server.plugins['hapi-sequelize'].db.sequelize.models));
 ```
 
 Then within a request handler you can access the models with

@@ -1,6 +1,3 @@
 node_modules
-.lock-wscript
 .idea
-npm-debug.log
 .DS_Store
-myhostname
