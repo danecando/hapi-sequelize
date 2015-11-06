@@ -1,6 +1,6 @@
 ## hapi-sequelize - A Hapi plugin for the Sequelize ORM
 
-[![Build Status](https://travis-ci.org/danecando/hapi-sequelize.svg)](https://travis-ci.org/danecando/hapi-sequelize)
+[![Build Status](https://travis-ci.org/danecando/hapi-sequelized.svg)](https://travis-ci.org/danecando/hapi-sequelized)
 
 * http://hapijs.com/
 * http://sequelizejs.com/
