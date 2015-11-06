@@ -11,7 +11,7 @@ var beforeEach = lab.beforeEach;
 var describe = lab.describe;
 var it = lab.it;
 
-describe('hapi-sequelized', function() {
+describe('hapi-sequelize', function() {
     // Hapi server for each test
     var server;
 
@@ -53,7 +53,7 @@ describe('hapi-sequelized', function() {
                 expect(err).to.not.exist;
 
                 // instance of Sequelize should be registered
-                expect(server.plugins['hapi-sequelized'].db.sequelize).to.be.an.instanceOf(Sequelize);
+                expect(server.plugins['hapi-sequelize'].db.sequelize).to.be.an.instanceOf(Sequelize);
 
                 done();
             });
@@ -67,8 +67,8 @@ describe('hapi-sequelized', function() {
             };
 
             server.register([register], function() {
-                var opt = server.plugins['hapi-sequelized'].db.sequelize.options;
-                var config = server.plugins['hapi-sequelized'].db.sequelize.config;
+                var opt = server.plugins['hapi-sequelize'].db.sequelize.options;
+                var config = server.plugins['hapi-sequelize'].db.sequelize.config;
 
                 // test all options in documentation
                 expect(opt.dialect).to.equal(options.dialect);
@@ -90,7 +90,7 @@ describe('hapi-sequelized', function() {
             };
 
             server.register([register], function() {
-                var models = server.plugins['hapi-sequelized'].db.sequelize.models;
+                var models = server.plugins['hapi-sequelize'].db.sequelize.models;
 
                 // check if the { timestamps: false } was applied to the User model
                 expect(models.User.options.timestamps).to.be.false();
@@ -107,7 +107,7 @@ describe('hapi-sequelized', function() {
             };
 
             server.register([register], function() {
-                var models = server.plugins['hapi-sequelized'].db.sequelize.models;
+                var models = server.plugins['hapi-sequelize'].db.sequelize.models;
 
                 // check if the User model was imported
                 expect(models.User).to.exist();
@@ -129,8 +129,8 @@ describe('hapi-sequelized', function() {
             };
 
             server.register([register], function(err) {
-                var opt = server.plugins['hapi-sequelized'].db.sequelize.options;
-                var config = server.plugins['hapi-sequelized'].db.sequelize.config;
+                var opt = server.plugins['hapi-sequelize'].db.sequelize.options;
+                var config = server.plugins['hapi-sequelize'].db.sequelize.config;
 
                 // check if the default options were applied
                 expect(err).to.not.exist();
@@ -150,7 +150,7 @@ describe('hapi-sequelized', function() {
             };
 
             server.register([register], function() {
-                var models = server.plugins['hapi-sequelized'].db.sequelize.models;
+                var models = server.plugins['hapi-sequelize'].db.sequelize.models;
 
                 // check if all models were imported
                 expect(models.User).to.exist();
@@ -180,7 +180,7 @@ describe('hapi-sequelized', function() {
             };
 
            server.register([register], function() {
-                var models = server.plugins['hapi-sequelized'].db.sequelize.models;
+                var models = server.plugins['hapi-sequelize'].db.sequelize.models;
 
                 // check if all models were imported
                 expect(models.User).to.exist();
