@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "hoek": "^2.12.0",
+    "joi": "^7.0.0",
     "sqlizr": "^1.1.0"
   },
   "peerDependencies": {
