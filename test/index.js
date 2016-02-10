@@ -11,6 +11,8 @@ var beforeEach = lab.beforeEach;
 var describe = lab.describe;
 var it = lab.it;
 
+// TODO: Tests for SQLITE
+
 describe('hapi-sequelize', function() {
     // Hapi server for each test
     var server;
