@@ -83,6 +83,28 @@ describe('hapi-sequelize', function() {
             });
         });
 
+    it('should apply the storage option for sqlite',
+        function(done) {
+            option.dialect = 'sqlite';
+            options.storage = 'db.sqlite';
+
+            var register = {
+                register: require('../lib'),
+                options: options
+            };
+
+            server.register([register], function() {
+                var opt = server.plugins['hapi-sequelize'].db.sequelize.options;
+                var config = server.plugins['hapi-sequelize'].db.sequelize.config;
+
+                // test storage options in documentation
+                expect(opt.dialect).to.equal(options.dialect);
+                expect(config.storage).to.equal(options.storage);
+
+                done();
+            });
+        });
+
     it('should apply application-wide model options',
         function(done) {
 
