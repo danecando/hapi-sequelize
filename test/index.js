@@ -95,11 +95,10 @@ describe('hapi-sequelize', function() {
 
             server.register([register], function() {
                 var opt = server.plugins['hapi-sequelize'].db.sequelize.options;
-                var config = server.plugins['hapi-sequelize'].db.sequelize.config;
 
                 // test storage options in documentation
                 expect(opt.dialect).to.equal(options.dialect);
-                expect(config.storage).to.equal(options.storage);
+                expect(opt.storage).to.equal(options.storage);
 
                 done();
             });
