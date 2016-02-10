@@ -85,7 +85,7 @@ describe('hapi-sequelize', function() {
 
     it('should apply the storage option for sqlite',
         function(done) {
-            option.dialect = 'sqlite';
+            options.dialect = 'sqlite';
             options.storage = 'db.sqlite';
 
             var register = {
