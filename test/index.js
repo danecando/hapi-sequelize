@@ -11,6 +11,7 @@ var beforeEach = lab.beforeEach;
 var describe = lab.describe;
 var it = lab.it;
 
+
 describe('hapi-sequelize', function() {
     // Hapi server for each test
     var server;
@@ -76,6 +77,27 @@ describe('hapi-sequelize', function() {
                 expect(opt.host).to.equal(options.host);
                 expect(config.database).to.equal(options.database);
                 expect(config.username).to.equal(options.user);
+
+                done();
+            });
+        });
+
+    it('should apply the storage option for sqlite',
+        function(done) {
+            options.dialect = 'sqlite';
+            options.storage = 'db.sqlite';
+
+            var register = {
+                register: require('../lib'),
+                options: options
+            };
+
+            server.register([register], function() {
+                var opt = server.plugins['hapi-sequelize'].db.sequelize.options;
+
+                // test storage options in documentation
+                expect(opt.dialect).to.equal(options.dialect);
+                expect(opt.storage).to.equal(options.storage);
 
                 done();
             });
