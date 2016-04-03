@@ -167,16 +167,4 @@ var dbModel = request.models.modelname;
 
 ### Security
 
-This plugin has been updated to use version 3+ of Sequelize which adds many 
-preventative measures to help users avoid the vulnerabilities explained
-in the article below. Please give the article a good read to ensure that you're
-using Sequelize safely!
-
 https://securityblog.redhat.com/2015/05/20/json-homoiconicity-and-database-access/
-
-Also make sure to take a look at the changelog if you're upgrading from a pre 3+ 
-version. There are several breaking changes that will need to be addressed.
-
-https://github.com/sequelize/sequelize/blob/master/changelog.md
-
-[1]: http://sequelize.readthedocs.org/en/latest/api/sequelize/#new-sequelizeuri-options

@@ -1,15 +1,16 @@
 {
-  "name": "hapi-sequelized",
-  "version": "2.2.2",
-  "description": "A hapi plugin for the sequelize ORM",
+  "name": "hapi-sequelize",
+  "version": "3.0.0",
+  "description": "A hapi plugin for interfacing with the sequelize ORM",
   "main": "lib/index.js",
   "scripts": {
     "test": "lab",
+    "test-cov-html": "lab -a code -r html -o coverage.html",
     "lint": "eslint lib/*.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/danecando/hapi-sequelized.git"
+    "url": "https://github.com/danecando/hapi-sequelize.git"
   },
   "keywords": [
     "sequelize",
@@ -18,27 +19,26 @@
     "sqlite",
     "postgresql",
     "postgres",
-    "mssql",
     "orm",
     "plugin",
-    "database"
+    "database",
+    "node",
+    "javascript"
   ],
   "author": "Dane Grant",
   "license": "MIT",
   "devDependencies": {
-    "code": "^1.3.0",
-    "eslint": "^0.21.2",
-    "hapi": "^8.4.0",
-    "lab": "^5.5.0",
-    "mysql": "^2.5.5",
-    "sqlite3": "^3.0.5"
-  },
-  "dependencies": {
-    "hoek": "^2.12.0",
-    "joi": "^7.0.0",
-    "sqlizr": "^1.1.0"
+    "code": "^2.1.1",
+    "eslint": "^1.10.3",
+    "hapi": "^13.3.0",
+    "lab": "^10.3.0",
+    "mysql": "^2.10.2",
+    "sqlite3": "^3.1.3"
   },
   "peerDependencies": {
     "sequelize": "^3.x"
+  },
+  "engines": {
+    "node": ">=4.0.0"
   }
 }
