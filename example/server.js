@@ -5,7 +5,7 @@ server.connection({ port: 3000 });
 
 server.register([
     {
-      register: require('hapi-sequelized'),
+      register: require('hapi-sequelize'),
       options: {
         database: 'dbName',
         user: 'root',
@@ -22,7 +22,7 @@ server.register([
     }
   ], function(err) {
     if (!err) {
-      server.plugins['hapi-sequelized'].db.sequelize.sync().then(function () {
+      server.plugins['hapi-sequelize'].db.sequelize.sync().then(function () {
         server.start(function () {
           console.log('Server running at:', server.info.uri);
         });
