@@ -1,170 +1,78 @@
 ## hapi-sequelized - a hapi plugin for the sequelize orm
 
-[![Build Status](https://travis-ci.org/danecando/hapi-sequelized.svg)](https://travis-ci.org/danecando/hapi-sequelized)
 [![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/hapi-sequelized)
 
-* http://hapijs.com/
-* http://sequelizejs.com/
+### Warning
+
+This version is still in beta. Hardly and only tested with current versions of Hapi (13.x) & Sequelize (3.x)
 
 ### Installation
 
-`npm install hapi-sequelized --save`
+`npm install --save hapi-sequelize`
 
-### Loading the plugin
+### Configuration
 
-See http://hapijs.com/tutorials/plugins
+Simply pass in your sequelize instance and a few basic options and voila. Options accepts a single object
+ or an array for multiple dbs.
 
 ```javascript
-server.register(
-    [
+server.register([
+  {
+      register: require('hapi-sequelized'),
+      options: [ 
         {
-            register: require('hapi-sequelized'),
-            options: {
-                database: 'dbName',
-                user: 'root',
-                pass: 'root',
-                dialect: 'mysql',
-                port: 8889,
-                models: 'models/**/*.js',
-                sequelize: {
-                    define: {
-                        underscoredAll: true
-                    }
-                }
-            }
-        },
-    ], function(err) {
-        if (err) {
-            console.error('failed to load plugin');
+          name: 'dbname', // identifier
+          models: ['./server/models/**/*.js'],  // paths/globs to model files
+          sequelize: new Sequelize(config, opts), // sequelize instance
+          sync: true, // sync models - default false
+          forceSync: false // force sync (drops tables) - default false
         }
-    }
-);
+      ]
+  }
+]);
 ```
 
-You can also pass in a [database connection URI][1] in the events that your
-database connection is extracted from the codebase, like on Heroku:
+### Database Instances
+
+Each registration adds a DB instance to the `server.plugins['hapi-sequelize']` object with the
+name option as the key.
 
 ```javascript
-server.register(
-    [
-        {
-            register: require('hapi-sequelized'),
-            options: {
-                uri: process.env.DATABASE_URI,
-                models: 'models/**/*.js',
-                sequelize: {
-                    define: {
-                        underscoredAll: true
-                    }
-                }
-            }
-        },
-    ], function(err) {
-        if (err) {
-            console.error('failed to load plugin');
-        }
-    }
-);
+function DB(sequelize, models) {
+  this.sequelize = sequelize;
+  this.models = models;
+} 
+
+// smth like this
+server.plugins['hapi-sequelize'][opts.name] = new DB(opts.sequelize, models);
 ```
 
-### Available Options
+### API
+
+#### `getDb(name)`
+
+The request object gets decorated with the method `getDb`. This allows you to easily grab a
+DB instance in a route handler. If you have multiple registrations pass the name of the one
+you would like returned or else the single or first registration will be returned.
 
 ```javascript
-options: {
-    database: 'dbName', // database name
-    user: 'root',       // db username
-    pass: 'root',       // db password
-    dialect: 'mysql',   // database type
-    host: 'localhost',  // db host
-    port: 8889,         // database port #
-    uri: 'postgres://user:pass@example.com:5432/dbname' // database URI
-    models: ['models/**/*.js', 'other/models/*.js'],   // glob or an array of globs to directories containing your sequelize models
-    logging: false      // sql query logging
-    sequelize: {       // Options object passed to the Sequelize constructor http://docs.sequelizejs.com/en/latest/api/sequelize/#new-sequelizedatabase-usernamenull-passwordnull-options
-        define: {
-            timestamps: false
-        }
-    }
+handler(request, reply) {
+  const db1 = request.getDb('db1');
+  console.log(db1.sequelize);
+  console.log(db1.models);
 }
 ```
 
-### Usage
+#### `db.getModel('User')`
 
-Your models are attached to the sequelize instance and will be available
-throughout your application via server.plugins (which is also available
-through the request object ie: request.server.plugins)
+Returns single model that matches the passed argument or null if the model doesn't exist.
 
-```javascript
-var models = request.server.plugins['hapi-sequelized'].db.sequelize.models;
+#### `db.getModels()`
 
-models.User.create({
-    email: 'some@email.com',
-    password: 'password123'
-});
-```
+Returns all models on the db instance
 
-### Model Definitions
+### TODO/Contributing
 
-Exports a function that returns a model definition 
-http://docs.sequelizejs.com/en/latest/docs/models-definition/
-
-```javascript
-module.exports = function(sequelize, DataTypes) {
-    var StoreOptions = sequelize.define(
-        'StoreOptions',
-        {
-            optionName: {
-                type: DataTypes.STRING,
-                unique: true,
-                allowNull: false
-            },
-            optionValue: {
-                type: DataTypes.TEXT
-            }
-        },
-        {
-            tableName: 'store_config',
-            timestamps: false
-        }
-    );
-
-    return StoreOptions;
-};
-```
-
-### Syncing Models
-
-Sync'ing needs to be done after the plugin has loaded (typically in the
-callback function where it was registered). A regular sync will 
- `CREATE TABLE IF NOT EXISTS` , while a sync with the 
-`{ force: true }` option passed will drop all of your tables first. 
-
-```javascript
-var db = server.plugins['hapi-sequelized'].db;
-db.sequelize.sync().then(function() {
-  console.log('models synced');
-});
-```
-
-### Add Models to Hapi Request Object
-
-To enable access to your models via the Hapi request object add the following code when creating the Hapi server
-
-```javascript
-server.ext('onPreHandler', function(modelCollections) {
-    return function(request, reply) {
-        request.models = modelCollections;
-        reply.continue();
-    }
-}(server.plugins['hapi-sequelized'].db.sequelize.models));
-```
-
-Then within a request handler you can access the models with
-
-```javascript
-var dbModel = request.models.modelname;
-```
-
-### Security
-
-https://securityblog.redhat.com/2015/05/20/json-homoiconicity-and-database-access/
+  * finalize api
+  * write tests
+  * improve readme
