@@ -1,3 +1,6 @@
 node_modules
 .idea
+npm-debug.log
 .DS_Store
+myhostname
+test/db
