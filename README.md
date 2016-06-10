@@ -130,6 +130,41 @@ module.exports = function(sequelize, DataTypes) {
     return StoreOptions;
 };
 ```
+### Models Association
+ 
+ Associating models is done through [sqlizr](https://github.com/mikefrey/sqlizr), check out for more in depth informations.
+ To associate models you just create an `associate` function in your model definition.
+ Sqlizr will pass and Object containing all the loaded models, to avoid the hassle of requiring models.
+ Then, within the function you build an association like you used to with sequelize.
+ 
+ ```javascript
+ module.exports = function(sequelize, DataTypes) {
+     var StoreOptions = sequelize.define(
+         'StoreOptions',
+         {
+             optionName: {
+                 type: DataTypes.STRING,
+                 unique: true,
+                 allowNull: false
+             },
+             optionValue: {
+                 type: DataTypes.TEXT
+             }
+         },
+         {
+             tableName: 'store_config',
+             timestamps: false
+         }
+     );
+     
+     StoreOptions.associate = function(models) {
+       models.StoreOptions.belongsTo(models.AnotherModel, options)
+     }
+ 
+     return StoreOptions;
+ };
+ ```
+ 
 
 ### Syncing Models
 
