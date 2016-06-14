@@ -139,30 +139,18 @@ module.exports = function(sequelize, DataTypes) {
  
  ```javascript
  module.exports = function(sequelize, DataTypes) {
-     var StoreOptions = sequelize.define(
-         'StoreOptions',
-         {
-             optionName: {
-                 type: DataTypes.STRING,
-                 unique: true,
-                 allowNull: false
-             },
-             optionValue: {
-                 type: DataTypes.TEXT
-             }
-         },
-         {
-             tableName: 'store_config',
-             timestamps: false
-         }
-     );
-     
-     StoreOptions.associate = function(models) {
-       models.StoreOptions.belongsTo(models.AnotherModel, options)
-     }
- 
-     return StoreOptions;
- };
+  return sequelize.define(
+    'ModelName',
+    {/** model attributes **/},
+    {
+      classMethods: {
+        associate: function(models) {
+          models.ModelName.belongsTo(models.AnotherModel, options);
+        }
+      }
+    }
+  );
+};
  ```
  
 
