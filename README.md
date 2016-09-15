@@ -18,7 +18,7 @@ Simply pass in your sequelize instance and a few basic options and voila. Option
 ```javascript
 server.register([
   {
-      register: require('hapi-sequelized'),
+      register: require('hapi-sequelize'),
       options: [ 
         {
           name: 'dbname', // identifier
