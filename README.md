@@ -1,6 +1,6 @@
-## hapi-sequelized - a hapi plugin for the sequelize orm
+## hapi-sequelize - a hapi plugin for the sequelize orm
 
-[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/hapi-sequelized)
+[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/hapi-sequelize)
 
 ### Warning
 
