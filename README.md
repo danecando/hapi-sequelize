@@ -1,6 +1,13 @@
 ## hapi-sequelize - a hapi plugin for the sequelize orm
 
 [![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/hapi-sequelize)
+<<<<<<< HEAD
+=======
+
+### Warning
+
+This version is still in beta. Hardly and only tested with current versions of Hapi (13.x) & Sequelize (3.x)
+>>>>>>> 8cd9d3813dd7adc9e62ffd5ad4df477a2a437ede
 
 This version of hapi-sequelize should be compatible with at least Hapi 13+ & Sequelize 3.x. If you're
 encountering an issue related to any specific version please open an issue. The rewrite of this plugin
@@ -71,9 +78,17 @@ Returns single model that matches the passed argument or null if the model doesn
 
 Returns all models on the db instance
 
+<<<<<<< HEAD
 ### Contributing 
  If you have any ideas for useful additions to the API or any other improvements to the plugin
  please open an issue or a PR. 
  
  Also feel free to tackle any of the outstanding todo's in the issues. These are mostly currently
  for testing, documentation. I hope to at least provide a reliable, developer friendly plugin.
+=======
+### TODO/Contributing
+
+  * finalize api
+  * write tests
+  * improve readme
+>>>>>>> 8cd9d3813dd7adc9e62ffd5ad4df477a2a437ede
