@@ -1,8 +1,18 @@
 {
+  "extends": ["eslint:recommended"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
   "rules": {
-    "quotes": [2, "single"]
+    "no-console": 0,
+    "padded-blocks": 0
   },
   "env": {
+    "es6": true,
     "node": true
+  },
+  "globals": {
+
   }
 }

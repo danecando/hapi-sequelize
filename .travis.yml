@@ -4,6 +4,7 @@ env:
 node_js:
   - "4.4"
   - "5.10"
+  - "6.3"
 sudo: false
 cache:
   directories:

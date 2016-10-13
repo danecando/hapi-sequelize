@@ -1,11 +1,11 @@
-## hapi-sequelized - a hapi plugin for the sequelize orm
+## hapi-sequelize - a hapi plugin for the sequelize orm
 
-[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/hapi-sequelized)
+[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/hapi-sequelize)
 
-### Warning
-
-This version is still in beta. Hardly and only tested with current versions of Hapi (13.x) & Sequelize (3.x)
-
+This version of hapi-sequelize should be compatible with at least Hapi 13+ & Sequelize 3.x. If you're
+encountering an issue related to any specific version please open an issue. The rewrite of this plugin
+ (3.x) has simplified things and made the plugin a bit more flexible. 
+ 
 ### Installation
 
 `npm install --save hapi-sequelize`
@@ -18,7 +18,7 @@ Simply pass in your sequelize instance and a few basic options and voila. Option
 ```javascript
 server.register([
   {
-      register: require('hapi-sequelized'),
+      register: require('hapi-sequelize'),
       options: [ 
         {
           name: 'dbname', // identifier
@@ -71,8 +71,9 @@ Returns single model that matches the passed argument or null if the model doesn
 
 Returns all models on the db instance
 
-### TODO/Contributing
-
-  * finalize api
-  * write tests
-  * improve readme
+### Contributing 
+ If you have any ideas for useful additions to the API or any other improvements to the plugin
+ please open an issue or a PR. 
+ 
+ Also feel free to tackle any of the outstanding todo's in the issues. These are mostly currently
+ for testing, documentation. I hope to at least provide a reliable, developer friendly plugin.

@@ -1,4 +1,53 @@
-  * updated to sequelize 3, removed redundant models on db object, updated readme and example
+  * resolved conflicts
+  * resolved conflicts
+  * cb bug
+  * readme update
+  * bug fixes
+  * other changaroos
+  * untested v3 codez
+  * plugin db instance class
+  * model utility fns
+  * new options schema
+  * spring cleaning, v3 rewrite
+  * Merge pull request #41 from zzbo/master
+  * Update server.js
+  * fix module name
+  * bump
+  * starting rewrite
+  * fix ci img again
+  * bump version fixed ci img
+  * update name in tests
+  * dropped d from name
+  * changelog, authors, and editorconfig
+  * updated module path in tests
+  * wrong major ver
+  * add sequelize to peerDependencies + remove root index following hapi guidelines
+  * Merge branch 'master' of https://github.com/danecando/hapi-seq
+  * Merge branch 'develop'
+  * updated sequelize module
+  * Merge pull request #30 from nvcexploder/master
+  * Spelling fix on README
+  * Merge branch 'jalcine-prs'
+  * version bump
+  * Merge branch 'master' of https://github.com/danecando/hapi-seq into jalcine-prs
+  * Merge pull request #28 from jalcine/allow-uri-for-config
+  * removed iojs
+  * doc: Update provided options in the README.
+  * lib: Drop initialization of 'sequelize' to undefined.
+  * lib: Allow for connection string to be used.
+  * test: Add test for connection URI.
+  * test: Move sample options setting to 'beforeEach'.
+  * Merge pull request #25 from mikeburgh/master
+  * Merge pull request #1 from mikeburgh/mikeburgh-patch-1
+  * Update README.md
+  * version bump
+  * fix sentence
+  * removed peer dependency, updated to latest version of sequelize, readme additions
+  * update version
+  * Merge pull request #23 from zachguo/patch-1
+  * give user freedom to configure logging
+  * updated sqlizr & sync example
+  * updated sequelize and readme  * updated to sequelize 3, removed redundant models on db object, updated readme and example
   * Merge branch 'tests'
   * some fixes
   * empty password is null
