@@ -45,7 +45,5 @@ lab.suite('hapi-sequelize', () => {
       expect(server.plugins['hapi-sequelize']['shop'].sequelize).to.be.an.instanceOf(Sequelize);
       done();
     })
-
   });
-
 });

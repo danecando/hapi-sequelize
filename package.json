@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "lab",
-    "test-cov-html": "lab -a code -r html -o coverage.html",
+    "test-cov-html": "lab -a code -r html -o coverage.html -r lcov -o lcov.info",
+    "coverage-report": "cat lcov.info | coveralls",
     "lint": "eslint lib/*.js"
   },
   "repository": {
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "code": "^4.0.0",
+    "coveralls": "^2.11.14",
     "eslint": "^3.7.1",
     "hapi": "^15.1.1",
     "lab": "^11.1.0",
