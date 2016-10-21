@@ -37,7 +37,8 @@
     "hapi": "^15.1.1",
     "lab": "^11.1.0",
     "mysql": "^2.10.2",
-    "sequelize": "^3.24.3"
+    "sequelize": "^3.24.3",
+    "sinon": "^1.17.6"
   },
   "peerDependencies": {
     "sequelize": "^3.x"

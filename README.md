@@ -29,7 +29,10 @@ server.register([
           models: ['./server/models/**/*.js'],  // paths/globs to model files
           sequelize: new Sequelize(config, opts), // sequelize instance
           sync: true, // sync models - default false
-          forceSync: false // force sync (drops tables) - default false
+          forceSync: false, // force sync (drops tables) - default false
+          onConnect: function (database) { // Optional
+            // migrations, seeders, etc.
+          }
         }
       ]
   }
