@@ -4,3 +4,5 @@ npm-debug.log
 .DS_Store
 myhostname
 test/db
+coverage.html
+lcov.info
