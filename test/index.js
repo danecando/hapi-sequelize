@@ -3,6 +3,7 @@
 // Load modules
 const Lab = require('lab');
 const Code = require('code');
+const Sinon = require('sinon');
 const Hapi = require('hapi');
 const Sequelize = require('sequelize');
 
@@ -27,6 +28,12 @@ lab.suite('hapi-sequelize', () => {
       dialect: 'mysql'
     });
 
+    const onConnect = function (database) {
+      server.log('onConnect called');
+    }
+
+    const spy = Sinon.spy(onConnect);
+
     server.register([
       {
         register: require('../lib'),
@@ -36,13 +43,15 @@ lab.suite('hapi-sequelize', () => {
             models: ['./test/models/**/*.js'],
             sequelize: sequelize,
             sync: true,
-            forceSync: true
+            forceSync: true,
+            onConnect: spy
           }
         ]
       }
     ], (err) => {
       expect(err).to.not.exist();
       expect(server.plugins['hapi-sequelize']['shop'].sequelize).to.be.an.instanceOf(Sequelize);
+      expect(spy.getCall(0).args[0]).to.be.an.instanceOf(Sequelize);
       server.plugins['hapi-sequelize']['shop'].sequelize.query('show tables', { type: Sequelize.QueryTypes.SELECT }).then((tables) => {
         expect(tables.length).to.equal(6);
         done();
