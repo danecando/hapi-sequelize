@@ -48,7 +48,6 @@ lab.suite('hapi-sequelize', () => {
         done();
       });
     })
-
   });
 
   test('plugin throws error when no models are found', { parallel: true }, (done) => {
@@ -80,5 +79,4 @@ lab.suite('hapi-sequelize', () => {
       done();
     })
   });
-
 });
