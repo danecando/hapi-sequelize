@@ -51,4 +51,34 @@ lab.suite('hapi-sequelize', () => {
 
   });
 
+  test('plugin throws error when no models are found', { parallel: true }, (done) => {
+
+    const server = new Hapi.Server();
+    server.connection();
+
+    const sequelize = new Sequelize('shop', 'root', '', {
+      host: '127.0.0.1',
+      port: 3306,
+      dialect: 'mysql'
+    });
+
+    server.register([
+      {
+        register: require('../lib'),
+        options: [
+          {
+            name: 'foo',
+            models: ['./foo/**/*.js'],
+            sequelize: sequelize,
+            sync: true,
+            forceSync: true
+          }
+        ]
+      }
+    ], (err) => {
+      expect(err).to.exist();
+      done();
+    })
+  });
+
 });
