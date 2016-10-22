@@ -33,7 +33,7 @@ lab.suite('hapi-sequelize', () => {
         options: [
           {
             name: 'shop',
-            models: ['./models/**/*.js'],
+            models: ['./test/models/**/*.js'],
             sequelize: sequelize,
             sync: true,
             forceSync: true
@@ -43,7 +43,10 @@ lab.suite('hapi-sequelize', () => {
     ], (err) => {
       expect(err).to.not.exist();
       expect(server.plugins['hapi-sequelize']['shop'].sequelize).to.be.an.instanceOf(Sequelize);
-      done();
+      server.plugins['hapi-sequelize']['shop'].sequelize.query('show tables', { type: Sequelize.QueryTypes.SELECT }).then((tables) => {
+        expect(tables.length).to.equal(6);
+        done();
+      });
     })
 
   });
