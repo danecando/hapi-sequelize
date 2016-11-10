@@ -40,7 +40,7 @@ lab.suite('hapi-sequelize', () => {
         options: [
           {
             name: 'shop',
-            models: ['./models/**/*.js'],
+            models: ['./test/models/**/*.js'],
             sequelize: sequelize,
             sync: true,
             forceSync: true,
@@ -52,6 +52,39 @@ lab.suite('hapi-sequelize', () => {
       expect(err).to.not.exist();
       expect(server.plugins['hapi-sequelize']['shop'].sequelize).to.be.an.instanceOf(Sequelize);
       expect(spy.getCall(0).args[0]).to.be.an.instanceOf(Sequelize);
+      server.plugins['hapi-sequelize']['shop'].sequelize.query('show tables', { type: Sequelize.QueryTypes.SELECT }).then((tables) => {
+        expect(tables.length).to.equal(6);
+        done();
+      });
+    })
+  });
+
+  test('plugin throws error when no models are found', { parallel: true }, (done) => {
+
+    const server = new Hapi.Server();
+    server.connection();
+
+    const sequelize = new Sequelize('shop', 'root', '', {
+      host: '127.0.0.1',
+      port: 3306,
+      dialect: 'mysql'
+    });
+
+    server.register([
+      {
+        register: require('../lib'),
+        options: [
+          {
+            name: 'foo',
+            models: ['./foo/**/*.js'],
+            sequelize: sequelize,
+            sync: true,
+            forceSync: true
+          }
+        ]
+      }
+    ], (err) => {
+      expect(err).to.exist();
       done();
     })
   });
