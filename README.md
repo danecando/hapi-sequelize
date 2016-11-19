@@ -57,7 +57,7 @@ server.plugins['hapi-sequelize'][opts.name] = new DB(opts.sequelize, models);
 
 ### Usage with Glue
 
-If you use [Glue](https://github.com/hapijs/glue) to compose your plugins, you'll need to load ``hapi-sequelize`` like this;
+If you use [Glue](https://github.com/hapijs/glue) to compose your server, you'll need to load ``hapi-sequelize`` like this;
 
 ```javascript
 var manifest = require('./config/manifest');
