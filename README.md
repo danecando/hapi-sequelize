@@ -55,6 +55,29 @@ function DB(sequelize, models) {
 server.plugins['hapi-sequelize'][opts.name] = new DB(opts.sequelize, models);
 ```
 
+### Usage with Glue
+
+If you use [Glue](https://github.com/hapijs/glue) to compose your plugins, you'll need to load ``hapi-sequelize`` like this;
+
+```javascript
+var manifest = require('./config/manifest');
+
+manifest.registrations.push({
+  "plugin": {
+    "register": "hapi-sequelize",
+    "options": {
+      "name": "name",
+      "models": 'models/models/*.js',
+      "sequelize": new Sequelize(config, opts),
+      "sync": true,
+      "forceSync": false // force sync (drops tables) - default false
+    }
+  }
+})
+
+// Load the manifest and start the server
+```
+
 ### API
 
 #### `getDb(name)`
