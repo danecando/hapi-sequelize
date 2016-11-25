@@ -7,9 +7,6 @@ const Sinon = require('sinon');
 const Hapi = require('hapi');
 const Sequelize = require('sequelize');
 
-// Module globals
-const internals = {};
-
 // Test shortcuts
 const lab = exports.lab = Lab.script();
 const test = lab.test;
@@ -28,7 +25,7 @@ lab.suite('hapi-sequelize', () => {
       dialect: 'mysql'
     });
 
-    const onConnect = function (database) {
+    const onConnect = function () {
       server.log('onConnect called');
     };
 
@@ -64,7 +61,7 @@ lab.suite('hapi-sequelize', () => {
     const server = new Hapi.Server();
     server.connection();
 
-    const onConnect = function (database) {
+    const onConnect = function () {
       server.log('onConnect called');
     };
 
