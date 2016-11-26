@@ -25,7 +25,7 @@ lab.suite('hapi-sequelize', () => {
       dialect: 'mysql'
     });
 
-    const onConnect = function () {
+    const onConnect = function (database) {
       server.log('onConnect called');
     };
 
@@ -61,7 +61,7 @@ lab.suite('hapi-sequelize', () => {
     const server = new Hapi.Server();
     server.connection();
 
-    const onConnect = function () {
+    const onConnect = function (database) {
       server.log('onConnect called');
     };
 
