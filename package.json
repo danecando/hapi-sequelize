@@ -1,10 +1,10 @@
 {
-  "name": "hapi-sequelize",
-  "version": "3.0.4",
+  "name": "@fredguile/hapi-sequelize",
+  "version": "3.0.5",
   "description": "A Hapi plugin for the fabulous Sequelize ORM",
   "main": "lib/index.js",
   "scripts": {
-    "test": "lab",
+    "test": "lab --reporter junit --output report.xml",
     "test-cov-html": "lab -a code -r html -o coverage.html -r lcov -o lcov.info",
     "coverage-report": "cat lcov.info | coveralls",
     "lint": "eslint lib/*.js"
@@ -30,19 +30,19 @@
   "license": "MIT",
   "dependencies": {
     "glob": "^7.0.3",
-    "joi": "^8.1.0"
+    "joi": "^10.6.0"
   },
   "devDependencies": {
     "code": "^4.0.0",
     "coveralls": "^2.11.14",
     "eslint": "^3.7.1",
-    "hapi": "^15.1.1",
-    "lab": "^11.1.0",
+    "lab": "^14.1.1",
     "mysql": "^2.10.2",
     "sequelize": "^3.24.3",
-    "sinon": "^1.17.6"
+    "sinon": "^2.3.8"
   },
   "peerDependencies": {
+    "hapi": "^16.5.0",
     "sequelize": "^3.x"
   },
   "engines": {

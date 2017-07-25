@@ -1,0 +1,44 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:latest
+        environment:
+          TZ: "/usr/share/zoneinfo/Europe/Berlin"
+      - image: mysql
+        environment:
+          MYSQL_ROOT_PASSWORD:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    environment:
+      TZ: "/usr/share/zoneinfo/Europe/Berlin"
+      NODE_ENV: test
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+    working_directory: /tmp/hapi-sequelize
+    steps:
+      - run:
+          name: Install Git, SSH client and MySQL
+          command: apt-get update && apt-get install -y git openssh-client mysql
+      - checkout
+      - restore_cache:
+          key: npm-packages-{{ checksum "package.json" }}
+      - run:
+          name: Install API NPMs
+          command: npm install
+      - run:
+          name: Create test DB "shop"
+          command: mysql -h mysql -uroot -e 'create database shop;'
+      - run:
+          name: Create test DB "blog"
+          command: mysql -h mysql -uroot -e 'create database blog;'
+      - run:
+          name: Run tests
+          command: npm test
+      - save_cache:
+          key: npm-packages-{{ checksum "package.json" }}
+          paths:
+            - /tmp/hapi-sequelize/node_modules
+      - store_artifacts:
+          path: /tmp/hapi-sequelize/report.xml
+      - store_test_results:
+          path: /tmp/hapi-sequelize/report.xml

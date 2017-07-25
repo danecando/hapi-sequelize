@@ -15,7 +15,11 @@ const lab = exports.lab = Lab.script();
 const test = lab.test;
 const expect = Code.expect;
 
-lab.suite('hapi-sequelize', () => {
+// Test DB
+const host = process.env.MYSQL_HOST || '127.0.0.1';
+const port = process.env.MYSQL_PORT || '3306';
+
+lab.suite('@fredguile/hapi-sequelize', () => {
 
   test('plugin works', { parallel: true }, (done) => {
 
@@ -23,8 +27,8 @@ lab.suite('hapi-sequelize', () => {
     server.connection();
 
     const sequelize = new Sequelize('shop', 'root', '', {
-      host: '127.0.0.1',
-      port: 3306,
+      host,
+      port,
       dialect: 'mysql'
     });
 
@@ -50,9 +54,10 @@ lab.suite('hapi-sequelize', () => {
       }
     ], (err) => {
       expect(err).to.not.exist();
-      expect(server.plugins['hapi-sequelize']['shop'].sequelize).to.be.an.instanceOf(Sequelize);
+      expect(server.plugins['@fredguile/hapi-sequelize']).to.exist();
+      expect(server.plugins['@fredguile/hapi-sequelize']['shop'].sequelize).to.be.an.instanceOf(Sequelize);
       expect(spy.getCall(0).args[0]).to.be.an.instanceOf(Sequelize);
-      server.plugins['hapi-sequelize']['shop'].sequelize.query('show tables', { type: Sequelize.QueryTypes.SELECT }).then((tables) => {
+      server.plugins['@fredguile/hapi-sequelize']['shop'].sequelize.query('show tables', { type: Sequelize.QueryTypes.SELECT }).then((tables) => {
         expect(tables.length).to.equal(6);
         done();
       });
@@ -65,8 +70,8 @@ lab.suite('hapi-sequelize', () => {
     server.connection();
 
     const sequelize = new Sequelize('shop', 'root', '', {
-      host: '127.0.0.1',
-      port: 3306,
+      host,
+      port,
       dialect: 'mysql'
     });
 

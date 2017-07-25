@@ -4,6 +4,6 @@ node_modules
 npm-debug.log
 .DS_Store
 myhostname
-test/db
 coverage.html
 lcov.info
+report.xml
