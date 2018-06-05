@@ -7,9 +7,6 @@ const Sinon = require('sinon');
 const Hapi = require('hapi');
 const Sequelize = require('sequelize');
 
-// Module globals
-const internals = {};
-
 // Test shortcuts
 const lab = exports.lab = Lab.script();
 const test = lab.test;
@@ -30,7 +27,7 @@ lab.suite('hapi-sequelize', () => {
 
     const onConnect = function (database) {
       server.log('onConnect called');
-    }
+    };
 
     const spy = Sinon.spy(onConnect);
 
@@ -56,6 +53,44 @@ lab.suite('hapi-sequelize', () => {
         expect(tables.length).to.equal(6);
         done();
       });
+    })
+  });
+
+  test('plugin fails to register when Sequelize fails to connect', { parallel: true }, (done) => {
+
+    const server = new Hapi.Server();
+    server.connection();
+
+    const onConnect = function (database) {
+      server.log('onConnect called');
+    };
+
+    const spy = Sinon.spy(onConnect);
+
+    const sequelize = new Sequelize('shop', 'root', '', {
+      host: '127.0.0.1',
+      port: 3307,
+      dialect: 'mysql'
+    });
+
+    server.register([
+      {
+        register: require('../lib'),
+        options: [
+          {
+            name: 'shop',
+            models: ['./test/models/**/*.js'],
+            sequelize: sequelize,
+            sync: true,
+            forceSync: true,
+            onConnect: spy
+          }
+        ]
+      }
+    ], (err) => {
+      expect(err).to.exist();
+      expect(err.message).to.include('ECONNREFUSED');
+      done();
     })
   });
 
