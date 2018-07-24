@@ -4,11 +4,12 @@
 [![npm](https://img.shields.io/npm/dm/localeval.svg)](https://www.npmjs.com/package/hapi-sequelize)
 
 
-### Warning
+### Warning :warning:
 
-This version of hapi-sequelize should be compatible with at least Hapi 13+ & Sequelize 3.x. If you're
-encountering an issue related to any specific version please open an issue. The rewrite of this plugin
- (3.x) has simplified things and made the plugin a bit more flexible. 
+This project is no longer actively maintained. The current version has been tested for versions of Hapi up to 13.x &
+Sequelize 3.x. It is known to be incompatible with versions of Hapi 17+ & Sequelize 4+. 
+
+There is a great fork of this project that has been in active development located at: https://github.com/valtlfelipe/hapi-sequelizejs
  
 ### Installation
 
